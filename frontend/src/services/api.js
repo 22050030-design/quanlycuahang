@@ -39,6 +39,7 @@ export const productAPI = {
   getAll: (params) => api.get('/products', { params }),
   getById: (id) => api.get(`/products/${id}`),
   getCategories: () => api.get('/products/categories'),
+  searchSuggestions: (q) => api.get('/products/search-suggestions', { params: { q } }),
 };
 
 export const cartAPI = {

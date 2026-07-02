@@ -3,6 +3,7 @@ const productController = require('../controllers/productController');
 const optionalAuth = require('../middleware/optionalAuth');
 
 router.get('/', productController.getAll);
+router.get('/search-suggestions', productController.searchSuggestions);
 router.get('/categories', productController.getCategories);
 router.get('/:id', optionalAuth, productController.getById);
 
