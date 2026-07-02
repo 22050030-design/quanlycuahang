@@ -46,11 +46,6 @@ export default function Login() {
               <p className="text-center mt-3">
                 Chưa có tài khoản? <Link to="/register">Đăng ký</Link>
               </p>
-              <div className="alert alert-info mt-3 small">
-                <strong>Tài khoản demo:</strong><br />
-                Admin: admin@shop.com / admin123<br />
-                User: đăng ký mới
-              </div>
             </div>
           </div>
         </div>
