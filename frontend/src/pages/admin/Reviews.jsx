@@ -18,28 +18,27 @@ export default function Reviews() {
   }
 
   return (
-    <div className="container-fluid py-4" style={{ background: '#121212', minHeight: '100vh', color: '#fff' }}>
+    <div className="container-fluid py-4" style={{ background: '#f5f7fa', minHeight: '100vh' }}>
       <style>{`
         .admin-table { border-radius: 12px; overflow: hidden; }
-        .admin-table thead th { background: #1e1e1e; color: #ccc; font-weight: 600; font-size: .85rem; border-bottom: 1px solid #333; padding: .75rem 1rem; }
-        .admin-table tbody td { padding: .75rem 1rem; vertical-align: middle; background: #1a1a1a; color: #ddd; border-bottom: 1px solid #2a2a2a; }
-        .admin-table tbody tr:hover td { background: #252525; }
+        .admin-table thead th { background: #f5f5f5; color: #37474f; font-weight: 600; font-size: .85rem; border-bottom: none; padding: .75rem 1rem; }
+        .admin-table tbody td { padding: .75rem 1rem; vertical-align: middle; }
         .btn-rounded { border-radius: 8px; font-size: .8rem; padding: .3rem .8rem; font-weight: 500; }
       `}</style>
 
       <div className="d-flex align-items-center gap-2 mb-4">
-        <FaStar style={{ fontSize: '1.5rem', color: '#ffcc80' }} />
-        <h2 className="fw-bold mb-0" style={{ color: '#fff' }}>Quản lý đánh giá</h2>
+        <FaStar style={{ fontSize: '1.5rem', color: '#f9a825' }} />
+        <h2 className="fw-bold mb-0" style={{ color: '#1a237e' }}>Quản lý đánh giá</h2>
       </div>
 
       {reviews.length === 0 ? (
         <div className="text-center py-5">
-          <FaStar style={{ fontSize: '3rem', color: '#555' }} />
-          <p className="mt-3" style={{ color: '#888' }}>Chưa có đánh giá nào</p>
+          <FaStar style={{ fontSize: '3rem', color: '#ccc' }} />
+          <p className="text-muted mt-3">Chưa có đánh giá nào</p>
         </div>
       ) : (
         <div className="table-responsive">
-          <table className="table admin-table shadow-sm">
+          <table className="table admin-table table-hover bg-white shadow-sm">
             <thead>
               <tr>
                 <th>ID</th>
@@ -57,11 +56,11 @@ export default function Reviews() {
                   <td className="fw-bold">{r.id}</td>
                   <td>{r.Product?.name}</td>
                   <td>{r.User?.name}</td>
-                  <td style={{ color: '#ffcc80' }}>{'★'.repeat(r.rating)}{'☆'.repeat(5 - r.rating)}</td>
-                  <td style={{ color: '#aaa', maxWidth: 250 }} className="text-truncate">{r.comment}</td>
-                  <td style={{ fontSize: '.85rem', color: '#888' }}>{new Date(r.created_at).toLocaleDateString('vi-VN')}</td>
+                  <td style={{ color: '#f9a825' }}>{'★'.repeat(r.rating)}{'☆'.repeat(5 - r.rating)}</td>
+                  <td style={{ color: '#555', maxWidth: 250 }} className="text-truncate">{r.comment}</td>
+                  <td style={{ fontSize: '.85rem', color: '#666' }}>{new Date(r.created_at).toLocaleDateString('vi-VN')}</td>
                   <td>
-                    <button className="btn btn-rounded" style={{ background: '#4a1515', color: '#ef9a9a', border: 'none' }} onClick={() => handleDelete(r.id)}>
+                    <button className="btn btn-rounded" style={{ background: '#ffebee', color: '#c62828' }} onClick={() => handleDelete(r.id)}>
                       <FaTrash className="me-1" /> Xóa
                     </button>
                   </td>

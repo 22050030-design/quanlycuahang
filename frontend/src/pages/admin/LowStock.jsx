@@ -12,27 +12,26 @@ export default function LowStock() {
   const formatPrice = (p) => new Intl.NumberFormat('vi-VN').format(p) + '₫'
 
   return (
-    <div className="container-fluid py-4" style={{ background: '#121212', minHeight: '100vh', color: '#fff' }}>
+    <div className="container-fluid py-4" style={{ background: '#f5f7fa', minHeight: '100vh' }}>
       <style>{`
         .admin-table { border-radius: 12px; overflow: hidden; }
-        .admin-table thead th { background: #1e1e1e; color: #ccc; font-weight: 600; font-size: .85rem; border-bottom: 1px solid #333; padding: .75rem 1rem; }
-        .admin-table tbody td { padding: .75rem 1rem; vertical-align: middle; background: #1a1a1a; color: #ddd; border-bottom: 1px solid #2a2a2a; }
-        .admin-table tbody tr:hover td { background: #252525; }
+        .admin-table thead th { background: #f5f5f5; color: #37474f; font-weight: 600; font-size: .85rem; border-bottom: none; padding: .75rem 1rem; }
+        .admin-table tbody td { padding: .75rem 1rem; vertical-align: middle; }
       `}</style>
 
       <div className="d-flex align-items-center gap-2 mb-4">
-        <FaExclamationTriangle style={{ fontSize: '1.5rem', color: '#ffcc80' }} />
-        <h2 className="fw-bold mb-0" style={{ color: '#ffcc80' }}>Sản phẩm sắp hết hàng</h2>
+        <FaExclamationTriangle style={{ fontSize: '1.5rem', color: '#e65100' }} />
+        <h2 className="fw-bold mb-0" style={{ color: '#e65100' }}>Sản phẩm sắp hết hàng</h2>
       </div>
 
       {products.length === 0 ? (
         <div className="text-center py-5">
-          <FaBox style={{ fontSize: '3rem', color: '#555' }} />
-          <p className="mt-3" style={{ color: '#888' }}>Không có sản phẩm nào sắp hết hàng</p>
+          <FaBox style={{ fontSize: '3rem', color: '#ccc' }} />
+          <p className="text-muted mt-3">Không có sản phẩm nào sắp hết hàng</p>
         </div>
       ) : (
         <div className="table-responsive">
-          <table className="table admin-table shadow-sm">
+          <table className="table admin-table table-hover bg-white shadow-sm">
             <thead>
               <tr>
                 <th>ID</th>
@@ -50,10 +49,10 @@ export default function LowStock() {
                   <td className="fw-bold">{p.id}</td>
                   <td><img src={p.image} alt="" style={{ width: 40, height: 40, objectFit: 'cover', borderRadius: 8 }} /></td>
                   <td>{p.name}</td>
-                  <td><span style={{ borderRadius: 8, padding: '.2rem .6rem', background: '#333', color: '#fff', fontWeight: 600, fontSize: '.8rem' }}>{p.Category?.name}</span></td>
-                  <td style={{ color: '#a5d6a7', fontWeight: 600 }}>{formatPrice(p.price)}</td>
-                  <td style={{ color: '#ef9a9a', fontWeight: 700, fontSize: '1.1rem' }}>{p.quantity}</td>
-                  <td><span style={{ borderRadius: 8, padding: '.25rem .7rem', fontSize: '.8rem', fontWeight: 600, background: '#4a1515', color: '#ef9a9a' }}>Sắp hết hàng</span></td>
+                  <td><span style={{ borderRadius: 8, padding: '.2rem .6rem', fontSize: .8, background: '#e8eaf6', color: '#283593' }}>{p.Category?.name}</span></td>
+                  <td style={{ color: '#2e7d32', fontWeight: 600 }}>{formatPrice(p.price)}</td>
+                  <td style={{ color: '#c62828', fontWeight: 700, fontSize: '1.1rem' }}>{p.quantity}</td>
+                  <td><span style={{ borderRadius: 8, padding: '.25rem .7rem', fontSize: .8, fontWeight: 600, background: '#ffebee', color: '#c62828' }}>Sắp hết hàng</span></td>
                 </tr>
               ))}
             </tbody>

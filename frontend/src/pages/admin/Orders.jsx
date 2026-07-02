@@ -23,42 +23,38 @@ export default function Orders() {
   }
 
   const statusStyle = {
-    pending: { background: '#4a3600', color: '#ffcc80' },
-    confirmed: { background: '#0d3b66', color: '#90caf9' },
-    shipping: { background: '#1a237e', color: '#9fa8da' },
-    completed: { background: '#1b5e20', color: '#a5d6a7' },
-    cancelled: { background: '#4a1515', color: '#ef9a9a' },
+    pending: { background: '#fff3e0', color: '#e65100' },
+    confirmed: { background: '#e3f2fd', color: '#1565c0' },
+    shipping: { background: '#e8eaf6', color: '#283593' },
+    completed: { background: '#e8f5e9', color: '#2e7d32' },
+    cancelled: { background: '#ffebee', color: '#c62828' },
   }
 
   return (
-    <div className="container-fluid py-4" style={{ background: '#121212', minHeight: '100vh', color: '#fff' }}>
+    <div className="container-fluid py-4" style={{ background: '#f5f7fa', minHeight: '100vh' }}>
       <style>{`
         .admin-table { border-radius: 12px; overflow: hidden; }
-        .admin-table thead th { background: #1e1e1e; color: #ccc; font-weight: 600; font-size: .85rem; border-bottom: 1px solid #333; padding: .75rem 1rem; }
-        .admin-table tbody td { padding: .75rem 1rem; vertical-align: middle; background: #1a1a1a; color: #ddd; border-bottom: 1px solid #2a2a2a; }
-        .admin-table tbody tr:hover td { background: #252525; }
+        .admin-table thead th { background: #f5f5f5; color: #37474f; font-weight: 600; font-size: .85rem; border-bottom: none; padding: .75rem 1rem; }
+        .admin-table tbody td { padding: .75rem 1rem; vertical-align: middle; }
         .btn-rounded { border-radius: 8px; font-size: .8rem; padding: .3rem .8rem; font-weight: 500; }
-        .form-control-dark { background: #2a2a2a; border: 1px solid #444; color: #fff; border-radius: 10px; }
-        .form-control-dark:focus { background: #333; border-color: #666; color: #fff; box-shadow: none; }
       `}</style>
 
       <div className="d-flex justify-content-between align-items-center mb-4">
-        <h2 className="fw-bold" style={{ color: '#fff' }}><FaShoppingCart className="me-2" />Quản lý đơn hàng</h2>
+        <h2 className="fw-bold" style={{ color: '#1a237e' }}><FaShoppingCart className="me-2" />Quản lý đơn hàng</h2>
         <div>
-          <select className="form-select form-control-dark" style={{ fontSize: '.9rem', minWidth: 180 }}
-            value={statusFilter} onChange={e => setStatusFilter(e.target.value)}>
-            <option value="" style={{ background: '#2a2a2a' }}>Tất cả trạng thái</option>
-            <option value="pending" style={{ background: '#2a2a2a' }}>Chờ xác nhận</option>
-            <option value="confirmed" style={{ background: '#2a2a2a' }}>Đã xác nhận</option>
-            <option value="shipping" style={{ background: '#2a2a2a' }}>Đang giao hàng</option>
-            <option value="completed" style={{ background: '#2a2a2a' }}>Hoàn thành</option>
-            <option value="cancelled" style={{ background: '#2a2a2a' }}>Đã hủy</option>
+          <select className="form-select" style={{ borderRadius: 10, fontSize: '.9rem' }} value={statusFilter} onChange={e => setStatusFilter(e.target.value)}>
+            <option value="">Tất cả trạng thái</option>
+            <option value="pending">Chờ xác nhận</option>
+            <option value="confirmed">Đã xác nhận</option>
+            <option value="shipping">Đang giao hàng</option>
+            <option value="completed">Hoàn thành</option>
+            <option value="cancelled">Đã hủy</option>
           </select>
         </div>
       </div>
 
       <div className="table-responsive">
-        <table className="table admin-table shadow-sm">
+        <table className="table admin-table table-hover bg-white shadow-sm">
           <thead>
             <tr>
               <th>Mã đơn</th>
@@ -73,13 +69,13 @@ export default function Orders() {
             {orders.map(order => (
               <tr key={order.id}>
                 <td className="fw-bold">#{order.id}</td>
-                <td>{order.User?.name}<br /><span style={{ fontSize: '.8rem', color: '#888' }}>{order.User?.email}</span></td>
-                <td style={{ fontSize: '.85rem', color: '#888' }}>{new Date(order.created_at).toLocaleDateString('vi-VN')}</td>
-                <td className="fw-bold" style={{ color: '#a5d6a7' }}>{formatPrice(order.total_amount)}</td>
+                <td>{order.User?.name}<br /><span style={{ fontSize: '.8rem', color: '#999' }}>{order.User?.email}</span></td>
+                <td style={{ fontSize: '.85rem', color: '#666' }}>{new Date(order.created_at).toLocaleDateString('vi-VN')}</td>
+                <td className="fw-bold" style={{ color: '#2e7d32' }}>{formatPrice(order.total_amount)}</td>
                 <td><span style={{ borderRadius: 8, padding: '.25rem .7rem', fontSize: '.8rem', fontWeight: 600, ...statusStyle[order.status] }}>{statusMap[order.status]}</span></td>
                 <td>
                   <Link to={`/admin/orders/${order.id}`} className="btn btn-rounded text-decoration-none d-inline-flex align-items-center"
-                    style={{ background: '#333', color: '#fff', border: '1px solid #555' }}>
+                    style={{ background: '#e3f2fd', color: '#1565c0' }}>
                     <FaEye className="me-1" /> Chi tiết
                   </Link>
                 </td>
