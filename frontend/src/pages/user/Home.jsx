@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { productAPI } from '../../services/api'
+import SearchBar from '../../components/SearchBar'
 
 export default function Home() {
   const [products, setProducts] = useState([])
@@ -15,9 +16,14 @@ export default function Home() {
 
   return (
     <div className="container py-4">
-      <div className="text-center mb-5">
+      <div className="text-center mb-4">
         <h1 className="display-4 fw-bold">Chào mừng đến với Cửa Hàng</h1>
         <p className="lead text-muted">Mua sắm trực tuyến dễ dàng và tiện lợi</p>
+      </div>
+      <div className="row justify-content-center mb-5">
+        <div className="col-md-6">
+          <SearchBar />
+        </div>
       </div>
 
       <section className="mb-5">

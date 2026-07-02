@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { productAPI, cartAPI } from '../../services/api'
 import { useAuth } from '../../context/AuthContext'
+import SearchBar from '../../components/SearchBar'
 
 export default function ProductList() {
   const [products, setProducts] = useState([])
@@ -36,14 +37,18 @@ export default function ProductList() {
     }
   }
 
+  const handleSearch = (q) => {
+    setSearch(q)
+    setSearchParams(q ? { search: q } : {})
+  }
+
   return (
     <div className="container py-4">
       <h2 className="mb-4">Sản phẩm</h2>
 
       <div className="row mb-4">
         <div className="col-md-4 mb-2">
-          <input className="form-control" placeholder="Tìm kiếm sản phẩm..." value={search}
-            onChange={e => { setSearch(e.target.value); setSearchParams(e.target.value ? { search: e.target.value } : {}) }} />
+          <SearchBar initialValue={search} onSearch={handleSearch} />
         </div>
         <div className="col-md-3 mb-2">
           <select className="form-select" value={category || ''} onChange={e => { setSearchParams(e.target.value ? { category: e.target.value } : {}); window.location.href = e.target.value ? `/products?category=${e.target.value}` : '/products' }}>
