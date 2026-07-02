@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { adminAPI } from '../../services/api'
-import { FaArrowLeft, FaShoppingCart, FaTruck, FaMoneyBillWave } from 'react-icons/fa'
+import { FaArrowLeft, FaShoppingCart } from 'react-icons/fa'
 
 export default function OrderDetail() {
   const { id } = useParams()
@@ -23,11 +23,11 @@ export default function OrderDetail() {
   }
 
   const statusStyle = {
-    pending: { background: '#fff3e0', color: '#e65100' },
-    confirmed: { background: '#e3f2fd', color: '#1565c0' },
-    shipping: { background: '#e8eaf6', color: '#283593' },
-    completed: { background: '#e8f5e9', color: '#2e7d32' },
-    cancelled: { background: '#ffebee', color: '#c62828' },
+    pending: { background: '#4a3600', color: '#ffcc80' },
+    confirmed: { background: '#0d3b66', color: '#90caf9' },
+    shipping: { background: '#1a237e', color: '#9fa8da' },
+    completed: { background: '#1b5e20', color: '#a5d6a7' },
+    cancelled: { background: '#4a1515', color: '#ef9a9a' },
   }
 
   const updateStatus = async () => {
@@ -42,34 +42,36 @@ export default function OrderDetail() {
     }
   }
 
-  if (!order) return <div className="text-center p-5">Đang tải...</div>
+  if (!order) return <div className="text-center p-5" style={{ color: '#fff' }}>Đang tải...</div>
 
   return (
-    <div className="container-fluid py-4" style={{ background: '#f5f7fa', minHeight: '100vh' }}>
+    <div className="container-fluid py-4" style={{ background: '#121212', minHeight: '100vh', color: '#fff' }}>
       <style>{`
         .detail-table { border-radius: 12px; overflow: hidden; }
-        .detail-table thead th { background: #f5f5f5; color: #37474f; font-weight: 600; font-size: .85rem; border-bottom: none; padding: .75rem 1rem; }
-        .detail-table tbody td { padding: .75rem 1rem; vertical-align: middle; }
+        .detail-table thead th { background: #1e1e1e; color: #ccc; font-weight: 600; font-size: .85rem; border-bottom: 1px solid #333; padding: .75rem 1rem; }
+        .detail-table tbody td { padding: .75rem 1rem; vertical-align: middle; background: #1a1a1a; color: #ddd; border-bottom: 1px solid #2a2a2a; }
+        .form-control-dark { background: #2a2a2a; border: 1px solid #444; color: #fff; border-radius: 8px; }
+        .form-control-dark:focus { background: #333; border-color: #666; color: #fff; box-shadow: none; }
       `}</style>
 
       <Link to="/admin/orders" className="btn mb-3 d-inline-flex align-items-center"
-        style={{ borderRadius: 8, background: '#f5f5f5', color: '#37474f', fontWeight: 500 }}>
+        style={{ borderRadius: 8, background: '#2a2a2a', color: '#fff', fontWeight: 500, border: '1px solid #444' }}>
         <FaArrowLeft className="me-2" /> Quay lại
       </Link>
 
-      <div className="card" style={{ border: 'none', borderRadius: 16 }}>
+      <div className="card" style={{ border: 'none', borderRadius: 16, background: '#1e1e1e' }}>
         <div className="card-body p-4">
           <div className="d-flex justify-content-between align-items-start mb-4">
             <div>
-              <h4 className="fw-bold" style={{ color: '#1a237e' }}><FaShoppingCart className="me-2" />Đơn hàng #{order.id}</h4>
+              <h4 className="fw-bold" style={{ color: '#fff' }}><FaShoppingCart className="me-2" />Đơn hàng #{order.id}</h4>
               <div className="d-flex align-items-center gap-2 mt-2">
-                <span className="fw-semibold">Trạng thái:</span>
-                <select className="form-select w-auto" style={{ borderRadius: 8, fontSize: '.9rem' }}
+                <span className="fw-semibold" style={{ color: '#ccc' }}>Trạng thái:</span>
+                <select className="form-select form-control-dark w-auto" style={{ fontSize: '.9rem' }}
                   value={newStatus} onChange={e => setNewStatus(e.target.value)}>
-                  {Object.entries(statusMap).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
+                  {Object.entries(statusMap).map(([k, v]) => <option key={k} value={k} style={{ background: '#2a2a2a' }}>{v}</option>)}
                 </select>
                 {newStatus !== order.status && (
-                  <button className="btn" style={{ borderRadius: 8, background: '#1565c0', color: '#fff' }}
+                  <button className="btn" style={{ borderRadius: 8, background: '#2a2a2a', color: '#fff', border: '1px solid #555' }}
                     onClick={updateStatus}>Cập nhật</button>
                 )}
               </div>
@@ -81,28 +83,28 @@ export default function OrderDetail() {
 
           <div className="row g-3 mb-4">
             <div className="col-md-6">
-              <div className="p-3" style={{ background: '#f5f5f5', borderRadius: 12 }}>
-                <h6 className="fw-bold mb-2" style={{ color: '#37474f' }}>Thông tin khách hàng</h6>
-                <div className="small">
-                  <div><strong>Họ tên:</strong> {order.User?.name}</div>
-                  <div><strong>Email:</strong> {order.User?.email}</div>
-                  <div><strong>Số điện thoại:</strong> {order.phone || order.User?.phone}</div>
-                  <div><strong>Địa chỉ:</strong> {order.shipping_address}</div>
+              <div className="p-3" style={{ background: '#252525', borderRadius: 12 }}>
+                <h6 className="fw-bold mb-2" style={{ color: '#ccc' }}>Thông tin khách hàng</h6>
+                <div className="small" style={{ color: '#bbb' }}>
+                  <div><strong style={{ color: '#ddd' }}>Họ tên:</strong> {order.User?.name}</div>
+                  <div><strong style={{ color: '#ddd' }}>Email:</strong> {order.User?.email}</div>
+                  <div><strong style={{ color: '#ddd' }}>Số điện thoại:</strong> {order.phone || order.User?.phone}</div>
+                  <div><strong style={{ color: '#ddd' }}>Địa chỉ:</strong> {order.shipping_address}</div>
                 </div>
               </div>
             </div>
             <div className="col-md-6">
-              <div className="p-3" style={{ background: '#f5f5f5', borderRadius: 12 }}>
-                <h6 className="fw-bold mb-2" style={{ color: '#37474f' }}>Thông tin đơn hàng</h6>
-                <div className="small">
-                  <div><strong>Ngày đặt:</strong> {new Date(order.created_at).toLocaleString('vi-VN')}</div>
-                  <div><strong>Thanh toán:</strong> {order.payment_method === 'cod' ? 'COD' : order.payment_method}</div>
+              <div className="p-3" style={{ background: '#252525', borderRadius: 12 }}>
+                <h6 className="fw-bold mb-2" style={{ color: '#ccc' }}>Thông tin đơn hàng</h6>
+                <div className="small" style={{ color: '#bbb' }}>
+                  <div><strong style={{ color: '#ddd' }}>Ngày đặt:</strong> {new Date(order.created_at).toLocaleString('vi-VN')}</div>
+                  <div><strong style={{ color: '#ddd' }}>Thanh toán:</strong> {order.payment_method === 'cod' ? 'COD' : order.payment_method}</div>
                 </div>
               </div>
             </div>
           </div>
 
-          <table className="table detail-table bg-white shadow-sm">
+          <table className="table detail-table shadow-sm">
             <thead>
               <tr>
                 <th>Sản phẩm</th>
@@ -122,16 +124,16 @@ export default function OrderDetail() {
                   </td>
                   <td>{formatPrice(detail.price)}</td>
                   <td>{detail.quantity}</td>
-                  <td className="fw-bold" style={{ color: '#2e7d32' }}>{formatPrice(detail.price * detail.quantity)}</td>
+                  <td className="fw-bold" style={{ color: '#a5d6a7' }}>{formatPrice(detail.price * detail.quantity)}</td>
                 </tr>
               ))}
             </tbody>
           </table>
 
-          <hr />
+          <hr style={{ borderColor: '#333' }} />
           <div className="d-flex justify-content-end align-items-center gap-2">
-            <span className="fw-bold" style={{ fontSize: '1.1rem', color: '#37474f' }}>Tổng cộng:</span>
-            <span style={{ fontSize: '1.5rem', fontWeight: 800, color: '#c62828' }}>{formatPrice(order.total_amount)}</span>
+            <span className="fw-bold" style={{ fontSize: '1.1rem', color: '#ccc' }}>Tổng cộng:</span>
+            <span style={{ fontSize: '1.5rem', fontWeight: 800, color: '#a5d6a7' }}>{formatPrice(order.total_amount)}</span>
           </div>
         </div>
       </div>
