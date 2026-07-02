@@ -20,7 +20,6 @@ export default function Dashboard() {
 
   const fmt = (p) => new Intl.NumberFormat('vi-VN').format(p) + '₫'
 
-  // SVG line chart
   const cd = [30, 45, 35, 55, 60, 45, 70, 55, 65, 80, 75, 95]
   const cw = 600, ch = 130
   const mx = Math.max(...cd)
@@ -29,10 +28,10 @@ export default function Dashboard() {
   const areaD = lineD + ` L ${cw} ${ch} L 0 ${ch} Z`
 
   return (
-    <div style={{ background: '#F5F7FB', minHeight: '100vh', padding: '28px' }}>
+    <div style={{ background: '#F3F6FB', minHeight: '100vh', padding: '28px' }}>
       <h2 className="fw-bold mb-4" style={{ color: '#0F172A' }}>Quản trị hệ thống</h2>
 
-      {/* Doanh thu – gradient xanh dương + line chart */}
+      {/* Doanh thu */}
       <div className="card border-0 mb-4 overflow-hidden" style={{
         borderRadius: 16,
         background: 'linear-gradient(135deg, #2563EB, #3B82F6)',
@@ -78,24 +77,27 @@ export default function Dashboard() {
           const up = growth >= 0
           return (
             <div className="col-md-3 col-sm-6" key={label}>
-              <div className="card border-0 h-100" style={{
+              <div className="card h-100" style={{
                 borderRadius: 16,
-                boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
-                cursor: 'default'
+                backgroundColor: '#FFFFFF',
+                border: '1px solid #E5E7EB',
+                boxShadow: '0 8px 24px rgba(0,0,0,0.08)',
+                cursor: 'default',
+                borderLeft: `4px solid ${color}`
               }}>
                 <div className="card-body p-4 d-flex flex-column">
-                  <div className="d-flex align-items-center justify-content-between mb-3">
-                    <span style={{ color: '#64748B', fontWeight: 600, fontSize: '.85rem', letterSpacing: '.3px' }}>
-                      {label.toUpperCase()}
-                    </span>
+                  <div className="d-flex align-items-center gap-2 mb-3">
                     <div style={{
-                      width: 44, height: 44, borderRadius: 12,
+                      width: 32, height: 32, borderRadius: 8,
                       background: `${color}15`,
                       display: 'flex', alignItems: 'center', justifyContent: 'center',
                       color: color
                     }}>
-                      <Icon style={{ fontSize: 20 }} />
+                      <Icon style={{ fontSize: 15 }} />
                     </div>
+                    <span style={{ color: '#64748B', fontWeight: 600, fontSize: '.85rem', letterSpacing: '.3px' }}>
+                      {label.toUpperCase()}
+                    </span>
                   </div>
                   <div style={{ fontSize: '2rem', fontWeight: 800, color: '#0F172A', marginBottom: 4 }}>
                     {data[key]}
