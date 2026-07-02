@@ -121,7 +121,11 @@ exports.getProducts = async (req, res) => {
 
 exports.createProduct = async (req, res) => {
   try {
-    const { name, description, price, image, quantity, category_id } = req.body;
+    const { name, description, price, quantity, category_id } = req.body;
+    let image = req.body.image || null;
+    if (req.file) {
+      image = 'uploads/products/' + req.file.filename;
+    }
     const product = await Product.create({ name, description, price, image, quantity, category_id });
     res.status(201).json({ message: 'Tạo sản phẩm thành công', product });
   } catch (err) {
@@ -137,7 +141,11 @@ exports.updateProduct = async (req, res) => {
     if (name) product.name = name;
     if (description !== undefined) product.description = description;
     if (price) product.price = price;
-    if (image !== undefined) product.image = image;
+    if (req.file) {
+      product.image = 'uploads/products/' + req.file.filename;
+    } else if (image !== undefined) {
+      product.image = image;
+    }
     if (quantity !== undefined) product.quantity = quantity;
     if (category_id) product.category_id = category_id;
     if (status) product.status = status;

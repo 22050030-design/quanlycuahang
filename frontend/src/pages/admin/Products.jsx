@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { adminAPI, productAPI } from '../../services/api'
-import { FaPlus, FaEdit, FaTrash, FaSearch, FaBox } from 'react-icons/fa'
+import { FaPlus, FaEdit, FaTrash, FaSearch, FaBox, FaUpload } from 'react-icons/fa'
 
 export default function Products() {
   const [products, setProducts] = useState([])
@@ -9,6 +9,10 @@ export default function Products() {
   const [showModal, setShowModal] = useState(false)
   const [edit, setEdit] = useState(null)
   const [form, setForm] = useState({ name: '', description: '', price: '', image: '', quantity: '', category_id: '', status: 'active' })
+  const [selectedFile, setSelectedFile] = useState(null)
+  const [preview, setPreview] = useState('')
+  const [fileError, setFileError] = useState('')
+  const fileRef = useRef(null)
 
   useEffect(() => {
     productAPI.getCategories().then(res => setCategories(res.data))
@@ -27,19 +31,56 @@ export default function Products() {
   const openAdd = () => {
     setEdit(null)
     setForm({ name: '', description: '', price: '', image: '', quantity: '', category_id: '', status: 'active' })
+    setSelectedFile(null)
+    setPreview('')
+    setFileError('')
     setShowModal(true)
   }
 
   const openEdit = (p) => {
     setEdit(p)
     setForm({ name: p.name, description: p.description || '', price: p.price, image: p.image || '', quantity: p.quantity, category_id: p.category_id || '', status: p.status })
+    setSelectedFile(null)
+    setPreview(p.image || '')
+    setFileError('')
     setShowModal(true)
+  }
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0]
+    setFileError('')
+    if (!file) return
+
+    const allowed = ['image/jpeg', 'image/png', 'image/webp', 'image/jpg']
+    if (!allowed.includes(file.type)) {
+      setFileError('Chỉ chấp nhận định dạng JPG, PNG, WEBP')
+      return
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      setFileError('Dung lượng ảnh tối đa 5MB')
+      return
+    }
+
+    setSelectedFile(file)
+    setPreview(URL.createObjectURL(file))
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const data = { ...form, price: parseFloat(form.price), quantity: parseInt(form.quantity) || 0 }
+      let data
+      if (selectedFile) {
+        data = new FormData()
+        data.append('name', form.name)
+        data.append('description', form.description)
+        data.append('price', parseFloat(form.price))
+        data.append('quantity', parseInt(form.quantity) || 0)
+        data.append('category_id', form.category_id)
+        data.append('status', form.status)
+        data.append('image', selectedFile)
+      } else {
+        data = { ...form, price: parseFloat(form.price), quantity: parseInt(form.quantity) || 0 }
+      }
       if (edit) await adminAPI.updateProduct(edit.id, data)
       else await adminAPI.createProduct(data)
       setShowModal(false)
@@ -120,10 +161,36 @@ export default function Products() {
                       </select>
                     </div>
                   </div>
-                  <div className="mb-3">
-                    <label className="form-label fw-semibold small">URL hình ảnh</label>
-                    <input className="form-control" style={{ borderRadius: 8 }} value={form.image} onChange={e => setForm({ ...form, image: e.target.value })} />
+
+                  {/* Upload ảnh từ máy */}
+                  <div className="row mb-3">
+                    <div className="col-md-6">
+                      <label className="form-label fw-semibold small">
+                        <FaUpload className="me-1" />Chọn ảnh từ máy tính
+                      </label>
+                      <input
+                        ref={fileRef}
+                        type="file"
+                        className="form-control"
+                        style={{ borderRadius: 8 }}
+                        accept=".jpg,.jpeg,.png,.webp"
+                        onChange={handleFileChange}
+                      />
+                      <div className="mt-1" style={{ fontSize: '.75rem', color: '#9e9e9e' }}>Định dạng: JPG, PNG, WEBP. Tối đa 5MB.</div>
+                      {fileError && <div className="mt-1" style={{ fontSize: '.8rem', color: '#c62828' }}>{fileError}</div>}
+                    </div>
+                    <div className="col-md-6">
+                      <label className="form-label fw-semibold small">Hoặc dán link URL hình ảnh</label>
+                      <input className="form-control" style={{ borderRadius: 8 }} value={form.image} onChange={e => { setForm({ ...form, image: e.target.value }); if (!selectedFile) setPreview(e.target.value) }} placeholder="https://..." />
+                    </div>
                   </div>
+
+                  {/* Preview */}
+                  {preview && (
+                    <div className="mb-3 text-center">
+                      <img src={preview} alt="preview" style={{ maxWidth: '100%', maxHeight: 180, borderRadius: 8, border: '1px solid #e0e0e0', objectFit: 'contain' }} />
+                    </div>
+                  )}
                 </div>
                 <div className="modal-footer" style={{ borderTop: '1px solid #eee' }}>
                   <button type="button" className="btn btn-secondary" style={{ borderRadius: 8 }} onClick={() => setShowModal(false)}>Hủy</button>

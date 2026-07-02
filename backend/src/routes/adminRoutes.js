@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const adminAuth = require('../middleware/adminAuth');
+const upload = require('../middleware/upload');
 const adminController = require('../controllers/adminController');
 
 router.get('/dashboard', adminAuth, adminController.getDashboard);
@@ -14,8 +15,8 @@ router.put('/categories/:id', adminAuth, adminController.updateCategory);
 router.delete('/categories/:id', adminAuth, adminController.deleteCategory);
 
 router.get('/products', adminAuth, adminController.getProducts);
-router.post('/products', adminAuth, adminController.createProduct);
-router.put('/products/:id', adminAuth, adminController.updateProduct);
+router.post('/products', adminAuth, upload.single('image'), adminController.createProduct);
+router.put('/products/:id', adminAuth, upload.single('image'), adminController.updateProduct);
 router.delete('/products/:id', adminAuth, adminController.deleteProduct);
 
 router.get('/orders', adminAuth, adminController.getOrders);
