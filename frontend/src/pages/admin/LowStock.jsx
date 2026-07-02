@@ -12,7 +12,7 @@ export default function LowStock() {
   const formatPrice = (p) => new Intl.NumberFormat('vi-VN').format(p) + '₫'
 
   return (
-    <div className="container-fluid py-4" style={{ background: '#f5f7fa', minHeight: '100vh' }}>
+    <div>
       <style>{`
         .admin-table { border-radius: 12px; overflow: hidden; }
         .admin-table thead th { background: #f5f5f5; color: #37474f; font-weight: 600; font-size: .85rem; border-bottom: none; padding: .75rem 1rem; }

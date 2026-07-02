@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext'
 import ProtectedRoute from './components/ProtectedRoute'
 import AdminRoute from './components/AdminRoute'
+import AdminLayout from './components/AdminLayout'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Home from './pages/user/Home'
@@ -41,14 +42,14 @@ export default function App() {
             <Route path="/orders" element={<ProtectedRoute><OrderHistory /></ProtectedRoute>} />
             <Route path="/orders/:id" element={<ProtectedRoute><OrderDetail /></ProtectedRoute>} />
             <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
-            <Route path="/admin" element={<AdminRoute><Dashboard /></AdminRoute>} />
-            <Route path="/admin/users" element={<AdminRoute><Users /></AdminRoute>} />
-            <Route path="/admin/categories" element={<AdminRoute><Categories /></AdminRoute>} />
-            <Route path="/admin/products" element={<AdminRoute><Products /></AdminRoute>} />
-            <Route path="/admin/orders" element={<AdminRoute><Orders /></AdminRoute>} />
-            <Route path="/admin/orders/:id" element={<AdminRoute><OrderDetailAdmin /></AdminRoute>} />
-            <Route path="/admin/low-stock" element={<AdminRoute><LowStock /></AdminRoute>} />
-            <Route path="/admin/reviews" element={<AdminRoute><Reviews /></AdminRoute>} />
+            <Route path="/admin" element={<AdminRoute><AdminLayout><Dashboard /></AdminLayout></AdminRoute>} />
+            <Route path="/admin/users" element={<AdminRoute><AdminLayout><Users /></AdminLayout></AdminRoute>} />
+            <Route path="/admin/categories" element={<AdminRoute><AdminLayout><Categories /></AdminLayout></AdminRoute>} />
+            <Route path="/admin/products" element={<AdminRoute><AdminLayout><Products /></AdminLayout></AdminRoute>} />
+            <Route path="/admin/orders" element={<AdminRoute><AdminLayout><Orders /></AdminLayout></AdminRoute>} />
+            <Route path="/admin/orders/:id" element={<AdminRoute><AdminLayout><OrderDetailAdmin /></AdminLayout></AdminRoute>} />
+            <Route path="/admin/low-stock" element={<AdminRoute><AdminLayout><LowStock /></AdminLayout></AdminRoute>} />
+            <Route path="/admin/reviews" element={<AdminRoute><AdminLayout><Reviews /></AdminLayout></AdminRoute>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
