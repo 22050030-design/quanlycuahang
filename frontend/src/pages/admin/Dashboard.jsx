@@ -15,10 +15,10 @@ export default function Dashboard() {
   const formatPrice = (p) => new Intl.NumberFormat('vi-VN').format(p) + '₫'
 
   const cards = [
-    { label: 'Tổng sản phẩm', value: data.totalProducts, bg: '#e3f2fd', text: '#1565c0', icon: FaBox },
-    { label: 'Tổng người dùng', value: data.totalUsers, bg: '#e8f5e9', text: '#2e7d32', icon: FaUsers },
-    { label: 'Tổng đơn hàng', value: data.totalOrders, bg: '#fce4ec', text: '#c62828', icon: FaShoppingCart },
-    { label: 'Chờ xác nhận', value: data.pendingOrders, bg: '#fff3e0', text: '#e65100', icon: FaClock },
+    { label: 'Tổng sản phẩm', value: data.totalProducts, icon: FaBox },
+    { label: 'Tổng người dùng', value: data.totalUsers, icon: FaUsers },
+    { label: 'Tổng đơn hàng', value: data.totalOrders, icon: FaShoppingCart },
+    { label: 'Chờ xác nhận', value: data.pendingOrders, icon: FaClock },
   ]
 
   return (
@@ -35,7 +35,7 @@ export default function Dashboard() {
         }
         .admin-card:hover {
           transform: translateY(-4px);
-          box-shadow: 0 8px 25px rgba(0,0,0,.12);
+          box-shadow: 0 8px 25px rgba(255,255,255,.08);
         }
         .admin-stat {
           font-size: 2.2rem;
@@ -51,7 +51,7 @@ export default function Dashboard() {
         }
         .admin-icon-big {
           font-size: 2.8rem;
-          opacity: .2;
+          opacity: .35;
           display: block;
         }
         .quick-link-btn {
@@ -80,11 +80,11 @@ export default function Dashboard() {
       <div className="row g-5 mb-5">
         {cards.map((c, i) => (
           <div className="col-6 col-md-3" key={i}>
-            <div className="card admin-card shadow-sm" style={{ background: c.bg }}>
+            <div className="card admin-card shadow-sm" style={{ background: '#1e1e1e' }}>
               <div className="text-center px-3 py-4">
-                <c.icon className="admin-icon-big mb-3" style={{ color: c.text }} />
-                <div className="admin-label mb-2" style={{ color: c.text }}>{c.label}</div>
-                <div className="admin-stat" style={{ color: c.text }}>{c.value}</div>
+                <c.icon className="admin-icon-big mb-3" style={{ color: '#fff' }} />
+                <div className="admin-label mb-2" style={{ color: '#ccc' }}>{c.label}</div>
+                <div className="admin-stat" style={{ color: '#fff' }}>{c.value}</div>
               </div>
             </div>
           </div>
@@ -93,11 +93,11 @@ export default function Dashboard() {
 
       <div className="row g-5">
         <div className="col-md-6">
-          <div className="card admin-card shadow-sm" style={{ background: '#f3e5f5', aspectRatio: 'auto', minHeight: 180 }}>
+          <div className="card admin-card shadow-sm" style={{ background: '#1e1e1e', aspectRatio: 'auto', minHeight: 180 }}>
             <div className="text-center px-3 py-4 w-100">
-              <FaDollarSign className="admin-icon-big mb-3" style={{ color: '#6a1b9a' }} />
-              <div className="admin-label mb-2" style={{ color: '#6a1b9a' }}>Doanh thu</div>
-              <div className="admin-stat" style={{ color: '#6a1b9a' }}>{formatPrice(data.totalRevenue)}</div>
+              <FaDollarSign className="admin-icon-big mb-3" style={{ color: '#fff' }} />
+              <div className="admin-label mb-2" style={{ color: '#ccc' }}>Doanh thu</div>
+              <div className="admin-stat" style={{ color: '#fff' }}>{formatPrice(data.totalRevenue)}</div>
             </div>
           </div>
         </div>
