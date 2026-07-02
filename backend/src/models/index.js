@@ -6,7 +6,6 @@ const CartItem = require('./CartItem');
 const Order = require('./Order');
 const OrderDetail = require('./OrderDetail');
 const Review = require('./Review');
-const Setting = require('./Setting');
 const sequelize = require('../config/database');
 
 User.hasOne(Cart, { foreignKey: 'user_id' });
@@ -43,5 +42,4 @@ module.exports = {
   Order,
   OrderDetail,
   Review,
-  Setting,
 };

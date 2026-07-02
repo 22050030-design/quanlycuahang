@@ -23,7 +23,6 @@ import Orders from './pages/admin/Orders'
 import OrderDetailAdmin from './pages/admin/OrderDetail'
 import LowStock from './pages/admin/LowStock'
 import Reviews from './pages/admin/Reviews'
-import Settings from './pages/admin/Settings'
 import NotFound from './pages/NotFound'
 
 export default function App() {
@@ -51,7 +50,6 @@ export default function App() {
             <Route path="/admin/orders/:id" element={<AdminRoute><AdminLayout><OrderDetailAdmin /></AdminLayout></AdminRoute>} />
             <Route path="/admin/low-stock" element={<AdminRoute><AdminLayout><LowStock /></AdminLayout></AdminRoute>} />
             <Route path="/admin/reviews" element={<AdminRoute><AdminLayout><Reviews /></AdminLayout></AdminRoute>} />
-            <Route path="/admin/settings" element={<AdminRoute><AdminLayout><Settings /></AdminLayout></AdminRoute>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>

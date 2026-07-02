@@ -61,12 +61,6 @@ export const reviewAPI = {
   create: (data) => api.post('/reviews', data),
 };
 
-export const settingsAPI = {
-  getPublic: () => api.get('/settings'),
-  getAdmin: () => api.get('/admin/settings'),
-  update: (data) => api.put('/admin/settings', data),
-};
-
 export const adminAPI = {
   getDashboard: () => api.get('/admin/dashboard'),
   getUsers: (params) => api.get('/admin/users', { params }),
