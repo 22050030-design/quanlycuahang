@@ -6,7 +6,7 @@ export default function AdminLayout({ children }) {
     `d-flex align-items-center gap-2 px-3 py-2 text-decoration-none rounded-3 small ${isActive ? 'bg-white bg-opacity-10 text-white fw-bold' : 'text-white-50'}`
 
   return (
-    <div className="d-flex" style={{ minHeight: '100vh', background: '#f5f7fa' }}>
+      <div className="d-flex" style={{ minHeight: '100vh', background: '#F8FAFC' }}>
       <div className="d-flex flex-column flex-shrink-0 p-3" style={{ width: 250, background: '#1e1e1e' }}>
         <div className="d-flex align-items-center gap-2 mb-4 px-2">
           <span style={{ fontSize: '1.2rem' }}>⚙️</span>
