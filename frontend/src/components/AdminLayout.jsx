@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom'
-import { FaTachometerAlt, FaBox, FaShoppingCart, FaUsers, FaTag, FaExclamationTriangle, FaStar } from 'react-icons/fa'
+import { FaTachometerAlt, FaBox, FaShoppingCart, FaUsers, FaTag, FaExclamationTriangle, FaStar, FaCog } from 'react-icons/fa'
 
 export default function AdminLayout({ children }) {
   const linkClass = ({ isActive }) =>
@@ -24,6 +24,7 @@ export default function AdminLayout({ children }) {
         <NavLink to="/admin/categories" className={linkClass}><FaTag /> Danh mục</NavLink>
         <NavLink to="/admin/low-stock" className={linkClass}><FaExclamationTriangle /> Sắp hết hàng</NavLink>
         <NavLink to="/admin/reviews" className={linkClass}><FaStar /> Đánh giá</NavLink>
+        <NavLink to="/admin/settings" className={linkClass}><FaCog /> Cài đặt website</NavLink>
       </div>
 
       <div className="flex-grow-1 p-4" style={{ overflowX: 'hidden' }}>

@@ -254,6 +254,33 @@ exports.getLowStockProducts = async (req, res) => {
   }
 };
 
+exports.getSettings = async (req, res) => {
+  try {
+    const settings = await require('../models').Setting.findAll();
+    const result = {};
+    settings.forEach(s => { result[s.key] = s.value; });
+    res.json(result);
+  } catch (err) {
+    res.status(500).json({ message: 'Lỗi server', error: err.message });
+  }
+};
+
+exports.updateSettings = async (req, res) => {
+  try {
+    const { Setting } = require('../models');
+    const entries = Object.entries(req.body);
+    for (const [key, value] of entries) {
+      await Setting.upsert({ key, value });
+    }
+    const settings = await Setting.findAll();
+    const result = {};
+    settings.forEach(s => { result[s.key] = s.value; });
+    res.json({ message: 'Cập nhật thành công', settings: result });
+  } catch (err) {
+    res.status(500).json({ message: 'Lỗi server', error: err.message });
+  }
+};
+
 exports.getReviews = async (req, res) => {
   try {
     const reviews = await Review.findAll({

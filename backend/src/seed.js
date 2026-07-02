@@ -1,6 +1,6 @@
 require('dotenv').config();
 const bcrypt = require('bcryptjs');
-const { sequelize, User, Category, Product } = require('./models');
+const { sequelize, User, Category, Product, Setting } = require('./models');
 
 async function seed() {
   try {
@@ -44,6 +44,18 @@ async function seed() {
       { name: 'Giày thể thao nam', description: 'Giày thể thao nam hàng chính hãng', price: 1200000, image: 'https://picsum.photos/seed/giay1/400/400', quantity: 2, category_id: categories[0].id },
       { name: 'Tai nghe Bluetooth', description: 'Tai nghe Bluetooth chống ồn', price: 1500000, image: 'https://picsum.photos/seed/tai1/400/400', quantity: 8, category_id: categories[1].id },
     ]);
+    await Setting.bulkCreate([
+      { key: 'site_name', value: 'Website bán đồ gia dụng' },
+      { key: 'site_address', value: '123 Nguyễn Huệ, Quận 1, TP. Hồ Chí Minh' },
+      { key: 'site_phone', value: '0123 456 789' },
+      { key: 'site_email', value: 'info@dodunggiadung.vn' },
+      { key: 'site_url', value: 'https://quanlycuahang-chi.vercel.app/' },
+      { key: 'copyright_text', value: 'Website bán đồ gia dụng' },
+      { key: 'social_facebook', value: 'https://facebook.com' },
+      { key: 'social_twitter', value: 'https://twitter.com' },
+      { key: 'social_youtube', value: 'https://youtube.com' },
+      { key: 'social_instagram', value: 'https://instagram.com' },
+    ], { ignoreDuplicates: true });
     console.log('Seed data created successfully');
     process.exit(0);
   } catch (err) {

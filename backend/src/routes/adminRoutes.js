@@ -25,6 +25,9 @@ router.put('/orders/:id/status', adminAuth, adminController.updateOrderStatus);
 
 router.get('/low-stock-products', adminAuth, adminController.getLowStockProducts);
 
+router.get('/settings', adminAuth, adminController.getSettings);
+router.put('/settings', adminAuth, adminController.updateSettings);
+
 router.get('/reviews', adminAuth, adminController.getReviews);
 router.delete('/reviews/:id', adminAuth, adminController.deleteReview);
 
