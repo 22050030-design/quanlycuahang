@@ -22,12 +22,16 @@ export default function Dashboard() {
   ]
 
   return (
-    <div className="container-fluid py-4">
+    <div className="container-fluid py-4" style={{ background: '#f5f7fa', minHeight: '100vh' }}>
       <style>{`
         .admin-card {
           border: none !important;
           border-radius: 16px !important;
           transition: transform .2s, box-shadow .2s;
+          aspect-ratio: 1 / 1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
         .admin-card:hover {
           transform: translateY(-4px);
@@ -45,9 +49,10 @@ export default function Dashboard() {
           letter-spacing: .5px;
           opacity: .8;
         }
-        .admin-icon {
-          font-size: 2.5rem;
-          opacity: .25;
+        .admin-icon-big {
+          font-size: 2.8rem;
+          opacity: .2;
+          display: block;
         }
         .quick-link-btn {
           border-radius: 10px;
@@ -72,13 +77,13 @@ export default function Dashboard() {
         </div>
       </div>
 
-      <div className="row g-4 mb-4">
+      <div className="row g-5 mb-5">
         {cards.map((c, i) => (
-          <div className="col-md-3" key={i}>
-            <div className="card admin-card shadow-sm p-3" style={{ background: c.bg }}>
-              <div className="card-body position-relative" style={{ padding: '.5rem 1rem' }}>
-                <c.icon className="position-absolute" style={{ top: 12, right: 12, color: c.text }} />
-                <div className="admin-label mb-1" style={{ color: c.text }}>{c.label}</div>
+          <div className="col-6 col-md-3" key={i}>
+            <div className="card admin-card shadow-sm" style={{ background: c.bg }}>
+              <div className="text-center px-3 py-4">
+                <c.icon className="admin-icon-big mb-3" style={{ color: c.text }} />
+                <div className="admin-label mb-2" style={{ color: c.text }}>{c.label}</div>
                 <div className="admin-stat" style={{ color: c.text }}>{c.value}</div>
               </div>
             </div>
@@ -86,38 +91,32 @@ export default function Dashboard() {
         ))}
       </div>
 
-      <div className="row g-4">
+      <div className="row g-5">
         <div className="col-md-6">
-          <div className="card admin-card shadow-sm p-3" style={{ background: '#f3e5f5' }}>
-            <div className="card-body" style={{ padding: '.5rem 1rem' }}>
-              <div className="d-flex justify-content-between align-items-start">
-                <div>
-                  <div className="admin-label mb-1" style={{ color: '#6a1b9a' }}>Doanh thu</div>
-                  <div className="admin-stat" style={{ color: '#6a1b9a' }}>{formatPrice(data.totalRevenue)}</div>
-                </div>
-                <FaDollarSign className="admin-icon" style={{ color: '#6a1b9a' }} />
-              </div>
+          <div className="card admin-card shadow-sm" style={{ background: '#f3e5f5', aspectRatio: 'auto', minHeight: 180 }}>
+            <div className="text-center px-3 py-4 w-100">
+              <FaDollarSign className="admin-icon-big mb-3" style={{ color: '#6a1b9a' }} />
+              <div className="admin-label mb-2" style={{ color: '#6a1b9a' }}>Doanh thu</div>
+              <div className="admin-stat" style={{ color: '#6a1b9a' }}>{formatPrice(data.totalRevenue)}</div>
             </div>
           </div>
         </div>
         <div className="col-md-6">
-          <div className="card admin-card shadow-sm p-3">
-            <div className="card-body" style={{ padding: '.5rem 1rem' }}>
-              <h6 className="fw-bold mb-3" style={{ color: '#37474f' }}><FaCog className="me-2" />Liên kết nhanh</h6>
-              <div className="d-flex flex-wrap gap-2">
-                <Link to="/admin/users" className="btn quick-link-btn" style={{ background: '#e8eaf6', color: '#283593' }}>
-                  <FaUsers className="me-1" /> Người dùng
-                </Link>
-                <Link to="/admin/categories" className="btn quick-link-btn" style={{ background: '#e0f2f1', color: '#00695c' }}>
-                  <FaTag className="me-1" /> Danh mục
-                </Link>
-                <Link to="/admin/low-stock" className="btn quick-link-btn" style={{ background: '#fff3e0', color: '#e65100' }}>
-                  <FaExclamationTriangle className="me-1" /> Sắp hết hàng
-                </Link>
-                <Link to="/admin/reviews" className="btn quick-link-btn" style={{ background: '#fce4ec', color: '#c62828' }}>
-                  <FaStar className="me-1" /> Đánh giá
-                </Link>
-              </div>
+          <div className="card shadow-sm p-4" style={{ border: 'none', borderRadius: 16, height: '100%' }}>
+            <h6 className="fw-bold mb-3" style={{ color: '#37474f' }}><FaCog className="me-2" />Liên kết nhanh</h6>
+            <div className="d-flex flex-wrap gap-2">
+              <Link to="/admin/users" className="btn quick-link-btn" style={{ background: '#e8eaf6', color: '#283593' }}>
+                <FaUsers className="me-1" /> Người dùng
+              </Link>
+              <Link to="/admin/categories" className="btn quick-link-btn" style={{ background: '#e0f2f1', color: '#00695c' }}>
+                <FaTag className="me-1" /> Danh mục
+              </Link>
+              <Link to="/admin/low-stock" className="btn quick-link-btn" style={{ background: '#fff3e0', color: '#e65100' }}>
+                <FaExclamationTriangle className="me-1" /> Sắp hết hàng
+              </Link>
+              <Link to="/admin/reviews" className="btn quick-link-btn" style={{ background: '#fce4ec', color: '#c62828' }}>
+                <FaStar className="me-1" /> Đánh giá
+              </Link>
             </div>
           </div>
         </div>
