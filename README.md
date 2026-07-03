@@ -15,9 +15,6 @@ Hệ thống quản lý bán hàng trực tuyến với kiến trúc 3 tầng (F
 quanlycuahang/
 ├── README.md
 ├── .gitignore
-├── database/
-│   ├── schema.sql          # Script tạo cơ sở dữ liệu
-│   └── seed.sql            # Dữ liệu mẫu
 ├── docs/
 │   ├── API_Documentation.md # Tài liệu API
 │   ├── Cloud_Deployment.md  # Hướng dẫn triển khai Cloud
