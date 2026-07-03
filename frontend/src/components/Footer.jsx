@@ -17,7 +17,7 @@ export default function Footer() {
             <h6 className="fw-bold text-uppercase mb-3">Danh mục điều hướng</h6>
             <ul className="list-unstyled mb-0 small">
               <li className="mb-2"><a href="/" className="text-white text-decoration-none">Trang chủ</a></li>
-              <li className="mb-0"><a href="/gioi-thieu" className="text-white text-decoration-none">Giới thiệu</a></li>
+              <li className="mb-0"><a href="/products" className="text-white text-decoration-none">Trang sản phẩm</a></li>
             </ul>
           </div>
           <div className="col-md-4">
