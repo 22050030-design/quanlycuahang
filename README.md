@@ -196,18 +196,6 @@ npm run dev
 |-------------|----------|-------|
 | GET | /api/health | Kiểm tra server |
 
-## Triển khai Cloud
-
-Xem hướng dẫn chi tiết tại [docs/Cloud_Deployment.md](docs/Cloud_Deployment.md)
-
-## Tài liệu API
-
-Xem chi tiết tại [docs/API_Documentation.md](docs/API_Documentation.md)
-
-## Test Cases
-
-Xem danh sách test cases tại [docs/Test_Cases.md](docs/Test_Cases.md)
-
 ## Hướng phát triển
 
 Các chức năng có thể phát triển trong tương lai:
